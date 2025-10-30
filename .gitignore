@@ -1,0 +1,52 @@
+#---------------------------------------------------
+# Maven
+#---------------------------------------------------
+# Maven build output directory
+/target/
+# IntelliJ/Eclipse/other IDE project files
+.idea/
+.vscode/
+*.iws
+*.iml
+*.ipr
+.project
+.classpath
+.settings
+# Logs
+*.log
+# Backup files
+*.bak
+*.swp
+
+#---------------------------------------------------
+# Java
+#---------------------------------------------------
+# Compiled class files
+*.class
+# JAR files
+*.jar
+*.war
+*.ear
+# JNI/native binaries
+*.dll
+*.so
+*.jnilib
+# Compiled modules
+/out/
+/bin/
+
+#---------------------------------------------------
+# OS and Editor Specific
+#---------------------------------------------------
+# macOS
+.DS_Store
+# Windows
+Thumbs.db
+
+#---------------------------------------------------
+# Secrets and Environment Variables
+#---------------------------------------------------
+# Ignore files that might contain the GEMINI_API_KEY or other secrets,
+# even though your current code reads it from an environment variable
+.env
+.local.properties
