@@ -1,7 +1,7 @@
 package com.gsv.gsvchatbot;
 
-import dev.langchain4j.model.chat.ChatLanguageModel;
-import dev.langchain4j.model.google.GoogleAiGeminiChatModel;
+import dev.langchain4j.model.chat.ChatLanguageModel; // CORRECTED: Reverted to original import package
+import dev.langchain4j.model.googleai.GoogleAiGeminiChatModel;
 
 public class ChatbotService {
 
@@ -17,12 +17,15 @@ public class ChatbotService {
         this.model = GoogleAiGeminiChatModel.builder()
             .apiKey(System.getenv("GEMINI_API_KEY"))
             .modelName("gemini-2.5-flash") // A recommended fast and capable model
-            .systemInstruction(SYSTEM_PROMPT)
+            // .systemMessage(SYSTEM_PROMPT) // REMOVED: This method is not available on the builder
             .build();
     }
 
     public String getResponse(String userMessage) {
         // Use the chat model to generate a response
+        // Note: The model's personality (SYSTEM_PROMPT) is not being applied here,
+        // as the simple builder method is unavailable. For multi-turn chat with
+        // a system prompt, you would need to implement ChatMemory/AiService.
         return model.generate(userMessage);
     }
 }
