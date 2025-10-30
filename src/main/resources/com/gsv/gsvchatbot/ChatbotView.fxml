@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="10.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gsv.gsvchatbot.ChatbotController">
+    <padding>
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+    </padding>
+
+    <TextArea fx:id="chatHistory" editable="false" promptText="Welcome to GSV Chatbot. How can I assist you today?" VBox.vgrow="ALWAYS">
+        <font>
+            <Font size="14.0" />
+        </font>
+    </TextArea>
+
+    <HBox alignment="CENTER_LEFT" spacing="10.0">
+        <TextField fx:id="userInput" onAction="#sendMessage" promptText="Type your message..." HBox.hgrow="ALWAYS" />
+        <Button onAction="#sendMessage" text="Send" />
+    </HBox>
+</VBox>
