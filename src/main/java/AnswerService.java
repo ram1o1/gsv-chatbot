@@ -7,7 +7,7 @@ import dev.langchain4j.data.segment.TextSegment;
 import dev.langchain4j.memory.chat.MessageWindowChatMemory;
 import dev.langchain4j.model.chat.StreamingChatModel;
 import dev.langchain4j.model.embedding.EmbeddingModel;
-import dev.langchain4j.model.googleai.GoogleAiEmbeddingModel;
+import dev.langchain4j.model.ollama.OllamaEmbeddingModel;
 import dev.langchain4j.model.googleai.GoogleAiGeminiStreamingChatModel;
 import dev.langchain4j.rag.content.retriever.ContentRetriever;
 import dev.langchain4j.rag.content.retriever.EmbeddingStoreContentRetriever;
@@ -47,10 +47,9 @@ public class AnswerService {
     }
 
     private EmbeddingModel initEmbeddingModel() {
-        return GoogleAiEmbeddingModel.builder()
-                .apiKey(ApiKeys.GEMINI_API_KEY)
-                // Use a compatible embedding model
-                .modelName("gemini-2.5-flash") 
+        return OllamaEmbeddingModel.builder()
+                .baseUrl("http://localhost:11434")
+                .modelName("embeddinggemma") // Replace with the actual model name you pulled
                 .build();
     }
 
