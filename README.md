@@ -3,7 +3,7 @@
 To run this demo, use a JDK that has JavaFX bundled. For instance, using SDKMAN:
 
 ```
-$ sdk install java 21.fx-zulu
+$ mvn clean install
 $ mvn javafx:run
 ```
 
@@ -18,5 +18,3 @@ The model keeps a memory with the previous chat messages, to keep track of the c
 
 This illustrates how the received answer can be handled using JavaFX bindings, and can be the starting point to build
 your own JavaFX-based Langchain4J-implementation.
-
-![Screenshot of the application with one question](screenshot.png)
