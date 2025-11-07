@@ -5,9 +5,17 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.Priority; 
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXTextField;
+import io.github.palexdev.materialfx.theming.MaterialFXStylesheets;
+import io.github.palexdev.materialfx.theming.UserAgentBuilder;
+// MFXFontIcon import removed to fix compilation error
 
 public class ChatApp extends Application {
 
@@ -15,7 +23,6 @@ public class ChatApp extends Application {
 
     private static final ObservableList<SearchAction> data = FXCollections.observableArrayList();
     private static final AnswerService docsAnswerService = new AnswerService();
-    private final TableView<SearchAction> table = new TableView<>();
     private final TextArea lastAnswer = new TextArea();
 
     public static void main(String[] args) {
@@ -27,46 +34,48 @@ public class ChatApp extends Application {
         LOGGER.info("Starting...");
 
         var holder = new VBox();
-        holder.setStyle("-fx-padding: 15px;");
+        holder.getStyleClass().add("chat-container");
 
-        Label label = new Label("What is your question?");
-        label.setStyle("-fx-font-size: 25px");
-        label.setStyle("-fx-font-weight: bold");
-
-        TextField input = new TextField();
+        MFXTextField input = new MFXTextField();
         input.setOnAction(e -> doSearch(input.getText()));
-        input.setMinWidth(500);
+        input.setFloatingText("Ask Gemini a question...");
+        input.setPrefWidth(600);
+        input.setPrefHeight(40);
 
-        Button search = new Button("Search");
+        // Button reverted to text-only to avoid MFXFontIcon error
+        MFXButton search = new MFXButton("Send"); 
         search.setOnAction(e -> doSearch(input.getText()));
+        // Style class for icon removed
 
-        var inputHolder = new HBox(input, search);
-        inputHolder.setStyle("-fx-padding: 0 0 25px 0");
-
-        TableColumn<SearchAction, String> timestamp = new TableColumn<>("Timestamp");
-        timestamp.setCellValueFactory(cellData -> cellData.getValue().getTimestampProperty());
-        timestamp.setMinWidth(250);
-        TableColumn<SearchAction, String> question = new TableColumn<>("Question");
-        question.setCellValueFactory(cellData -> cellData.getValue().getQuestionProperty());
-        question.setMinWidth(250);
-        TableColumn<SearchAction, String> answer = new TableColumn<>("Answer");
-        answer.setCellValueFactory(cellData -> cellData.getValue().getAnswerProperty());
-        answer.setMinWidth(300);
-        TableColumn<SearchAction, Boolean> finished = new TableColumn<>("Finished");
-        finished.setCellValueFactory(cellData -> cellData.getValue().getFinishedProperty());
-        finished.setMinWidth(50);
-
-        table.getColumns().addAll(timestamp, question, answer, finished);
-        table.setItems(data);
-        table.setStyle("-fx-padding: 0 25px 0 0");
-
+        var inputHolder = new HBox(10, input, search);
+        inputHolder.getStyleClass().add("input-holder");
+        
+        // --- Single Scrollable Answer Area ---
         lastAnswer.setWrapText(true);
+        lastAnswer.setEditable(false);
+        lastAnswer.setPrefWidth(Region.USE_COMPUTED_SIZE);
+        lastAnswer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        
+        ScrollPane scrollPane = new ScrollPane(lastAnswer);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        scrollPane.getStyleClass().add("chat-history-area");
+        
+        holder.getChildren().addAll(scrollPane, inputHolder);
+        
+        VBox.setVgrow(scrollPane, Priority.ALWAYS);
 
-        holder.getChildren().addAll(label, inputHolder, new HBox(table, lastAnswer));
+        // --- Apply MaterialFX Stylesheet Globally ---
+        UserAgentBuilder.builder()
+                .themes(MaterialFXStylesheets.DEFAULT)
+                .build(); 
 
-        Scene scene = new Scene(holder);
+        Scene scene = new Scene(holder, 850, 600);
+        
+        // --- Load Custom Gemini CSS ---
+        scene.getStylesheets().add(getClass().getResource("/gemini-style.css").toExternalForm());
 
-        stage.setTitle("JavaFX Chat Langchain4J Demo");
+        stage.setTitle("JavaFX Chat Langchain4J Demo (Gemini Style)");
         stage.setScene(scene);
         stage.centerOnScreen();
         stage.show();

@@ -1,0 +1,73 @@
+/* Custom CSS for a Gemini-like Chat UI */
+
+/* Define Color Palette (Based on Material You/Gemini) */
+.root {
+    -gemini-surface: #F0F4F9; /* Very light blue-gray background */
+    -gemini-on-surface: #1E1E22; /* Dark text color */
+    -gemini-primary: #1A73E8; /* Blue for highlights/buttons */
+    -gemini-container: #FFFFFF; /* White for card/input background */
+    -fx-background-color: -gemini-surface;
+    -fx-font-family: "Roboto", "Arial"; /* Use a modern, clean font */
+}
+
+/* Overall Chat Container (The main VBox) */
+.chat-container {
+    -fx-padding: 0;
+}
+
+/* Chat History Area (ScrollPane containing the TextArea) */
+.chat-history-area {
+    -fx-padding: 20px;
+    -fx-background-color: -gemini-surface;
+    -fx-border-insets: 0;
+    -fx-border-color: transparent;
+}
+
+/* Answer Text Area Styling */
+.text-area {
+    -fx-control-inner-background: transparent;
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-text-fill: -gemini-on-surface;
+    -fx-font-size: 14px;
+}
+.text-area .content {
+    -fx-padding: 0;
+}
+
+/* Input Bar Styling */
+.input-holder {
+    -fx-alignment: CENTER; 
+    -fx-padding: 20px 0 20px 0;
+    -fx-background-color: -gemini-surface;
+}
+
+/* MaterialFX TextField Styling (Input box) */
+.mfx-text-field {
+    -fx-background-color: -gemini-container;
+    -fx-background-radius: 25;
+    -fx-border-color: #DADCE0;
+    -fx-border-radius: 25;
+    -fx-border-width: 1px;
+    -fx-padding: 10px 20px 10px 20px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0.1, 0, 2);
+}
+
+/* FIX: Floating Text Position - Increase vertical padding inside the text input area */
+.mfx-text-field .text-input {
+    -fx-padding: 18px 20px 8px 20px; 
+}
+
+/* MaterialFX Button Styling (Send button - text only) */
+.mfx-button {
+    -fx-background-color: -gemini-primary;
+    -fx-text-fill: white;
+    -fx-background-radius: 25;
+    -fx-padding: 10px 20px;
+    -fx-font-weight: bold;
+}
+.mfx-button:hover {
+    -fx-background-color: #1555a8;
+}
