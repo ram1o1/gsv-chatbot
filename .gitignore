@@ -2,3 +2,4 @@
 /src/main/resources/knowledge-base
 *.class
 *.env
+.env

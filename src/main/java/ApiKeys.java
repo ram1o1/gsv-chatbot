@@ -1,6 +1,6 @@
-public class ApiKeys {
+import io.github.cdimascio.dotenv.Dotenv;
 
-    // You can use "demo" api key for demonstration purposes.
-    // You can get your own OpenAI API key here: https://platform.openai.com/account/api-keys
-    public static final String GEMINI_API_KEY = "AIzaSyD8tXHOnBURp8KP1pE_4-nFGTKgXdkMIWw";
+public class ApiKeys {
+    private static final Dotenv dotenv = Dotenv.load();
+    public static final String GEMINI_API_KEY = dotenv.get("GEMINI_API_KEY");
 }
