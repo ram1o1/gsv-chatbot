@@ -145,7 +145,7 @@ public class AnswerService {
     private void initChat(SearchAction action, ContentRetriever contentRetriever) {
         StreamingChatModel model = GoogleAiGeminiStreamingChatModel.builder()
                 .apiKey(ApiKeys.GEMINI_API_KEY)
-                .modelName("gemini-2.5-flash")
+                .modelName("gemini-2.0-flash-lite")
                 .build();
 
         // Use the contentRetriever to augment the chat responses
