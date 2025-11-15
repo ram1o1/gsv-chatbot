@@ -1,20 +1,34 @@
-# JavaFX example using Langchain4J to provide a Chat user interface
+# JavaFX RAG Chatbot (Langchain4J + Gemini)
 
-To run this demo, use a JDK that has JavaFX bundled. For instance, using SDKMAN:
+This project is a JavaFX chat application demonstrating **Retrieval-Augmented Generation (RAG)**. It uses **Langchain4J** to connect to the **Google Gemini** model and answer questions based on a private knowledge base of PDF documents.
 
-```
-$ mvn clean install
-$ mvn javafx:run
-```
+## Key Technologies
+* **Frontend**: JavaFX (MaterialFX style).
+* **LLM**: Google Gemini (`gemini models`).
+* **RAG Components**:
+    * **Embedding Model**: Ollama (`embeddinggemma`) on `http://localhost:11434`.
+    * **Vector Store**: ChromaDB on `http://localhost:8000`.
 
-## Goal of this project
+## Prerequisites
 
-Demonstration of a JavaFX user interface to visualize the answer being streamed from OpenAI to the application. The
-answer gets visualized into the right box and inside the table while it's being received.
+1.  **JDK 21** with JavaFX.
+2.  **Maven**.
+3.  **Google Gemini API Key**: Must be set in a **`.env`** file as `GEMINI_API_KEY`.
+4.  **ChromaDB** and **Ollama** running locally on their respective default ports.
 
-All previous application and search actions get listed in the table.
+## Setup and Run
 
-The model keeps a memory with the previous chat messages, to keep track of the conversation.
+1.  **Prepare Knowledge Base**:
+    Place your PDF files in the directory: `src/main/resources/knowledge-base/`
 
-This illustrates how the received answer can be handled using JavaFX bindings, and can be the starting point to build
-your own JavaFX-based Langchain4J-implementation.
+2.  **Execute**:
+    ```bash
+    # Build the project
+    $ mvn clean install
+
+    # Run the application
+    $ mvn javafx:run
+    ```
+
+The RAG pipeline will automatically load and ingest your PDFs into the vector store upon startup.
+```eof

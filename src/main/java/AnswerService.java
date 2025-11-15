@@ -1,5 +1,5 @@
 import dev.langchain4j.data.document.Document;
-import dev.langchain4j.data.document.DocumentParser; // CORRECTED IMPORT
+import dev.langchain4j.data.document.DocumentParser;
 import dev.langchain4j.data.document.DocumentSplitter;
 import dev.langchain4j.data.document.loader.FileSystemDocumentLoader;
 import dev.langchain4j.data.document.parser.apache.pdfbox.ApachePdfBoxDocumentParser;
@@ -145,7 +145,7 @@ public class AnswerService {
     private void initChat(SearchAction action, ContentRetriever contentRetriever) {
         StreamingChatModel model = GoogleAiGeminiStreamingChatModel.builder()
                 .apiKey(ApiKeys.GEMINI_API_KEY)
-                .modelName("gemini-2.0-flash-lite")
+                .modelName("gemini-2.0-flash")
                 .build();
 
         // Use the contentRetriever to augment the chat responses

@@ -15,7 +15,6 @@ import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.theming.MaterialFXStylesheets;
 import io.github.palexdev.materialfx.theming.UserAgentBuilder;
-// MFXFontIcon import removed to fix compilation error
 
 public class ChatApp extends Application {
 
@@ -75,7 +74,7 @@ public class ChatApp extends Application {
         // --- Load Custom Gemini CSS ---
         scene.getStylesheets().add(getClass().getResource("/gemini-style.css").toExternalForm());
 
-        stage.setTitle("JavaFX Chat Langchain4J Demo (Gemini Style)");
+        stage.setTitle("GSV Chatbot");
         stage.setScene(scene);
         stage.centerOnScreen();
         stage.show();
